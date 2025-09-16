@@ -28,36 +28,26 @@ import { MoreHorizontal } from 'lucide-react';
 import { useState } from 'react';
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Nakes = {
+export type Wilayah = {
     id: string;
-    no_nakes: string;
-    nama: string;
-    no_hp: string;
-    alamat: string;
+    kd_wilayah: string;
+    nama_wilayah: string;
 };
 
-export const columns: ColumnDef<Nakes>[] = [
+export const columns: ColumnDef<Wilayah>[] = [
     {
-        accessorKey: 'no_nakes',
-        header: 'Nomer Tenaga Kesehatan',
+        accessorKey: 'kd_wilayah',
+        header: 'Kode wilayah',
     },
     {
-        accessorKey: 'nama',
-        header: 'Nama',
+        accessorKey: 'nama_wilayah',
+        header: 'Nama Wilayah',
     },
 
-    {
-        accessorKey: 'no_hp',
-        header: 'Nomer Handphone',
-    },
-    {
-        accessorKey: 'alamat',
-        header: 'Alamat',
-    },
     {
         id: 'actions',
         cell: ({ row }) => {
-            const nakes = row.original;
+            const wilayah = row.original;
             const [openDialog, setOpenDialog] = useState(false);
 
             return (
@@ -71,11 +61,11 @@ export const columns: ColumnDef<Nakes>[] = [
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(nakes.id)}>Copy Tenaga Kesehatan ID</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(wilayah.id)}>Copy Wilayah ID</DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem asChild>
-                                <Link className="block w-full" href={route('nakes.view', nakes.id)} as="button" prefetch>
-                                    View Data Tenaga Kesehatan
+                                <Link className="block w-full" href={route('wilayah.view', wilayah.id)} as="button" prefetch>
+                                    View Wilayah
                                 </Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem onClick={() => setOpenDialog(true)} className="text-red-600">
@@ -89,14 +79,14 @@ export const columns: ColumnDef<Nakes>[] = [
                             <AlertDialogHeader>
                                 <AlertDialogTitle>Hapus Data Balita</AlertDialogTitle>
                                 <AlertDialogDescription>
-                                    Data <strong>{nakes.nama}</strong> akan dihapus secara permanen. Lanjutkan?
+                                    Data <strong>{wilayah.nama_wilayah}</strong> akan dihapus secara permanen. Lanjutkan?
                                 </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
                                 <AlertDialogCancel>Batal</AlertDialogCancel>
                                 <AlertDialogAction
                                     onClick={() =>
-                                        router.delete(route('nakes.hapus', nakes.id), {
+                                        router.delete(route('wilayah.hapus', wilayah.id), {
                                             preserveScroll: true,
                                             onSuccess: () => {
                                                 console.log('Data berhasil dihapus');

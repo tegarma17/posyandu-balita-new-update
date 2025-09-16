@@ -8,7 +8,7 @@ import AppLogo from './app-logo';
 
 const mainNavItemsMaster: NavItem[] = [
     { title: 'Data Balita', href: '/data-balita', icon: Users },
-    { title: 'Data Wilayah', href: '/user-account', icon: UserCog },
+    { title: 'Data Wilayah', href: '/data-wilayah', icon: UserCog },
     { title: 'Data Tenaga Kesehatan', href: '/data-nakes', icon: Users },
     { title: 'Data Posyandu', href: '/pengurus', icon: HousePlus },
 ];

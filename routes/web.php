@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BalitaController;
 use App\Http\Controllers\NakesController;
+use App\Http\Controllers\WilayahController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -28,6 +29,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/tampil-data-nakes/{nakes}', [NakesController::class, 'view'])->name('nakes.view');
     Route::put('/update-data-nakes/{nakes}/update', [NakesController::class, 'update'])->name('nakes.update');
     Route::delete('/hapus-data-nakes/{nakes}/delete', [NakesController::class, 'delete'])->name('nakes.hapus');
+
+    Route::get('/data-wilayah', [WilayahController::class, 'index'])->name('wilayah.index');
+    Route::get('/tambah-data-wilayah', [WilayahController::class, 'add'])->name('wilayah.tambah');
+    Route::post('/simpan-data-wilayah', [WilayahController::class, 'simpan'])->name('wilayah.simpan');;
+    Route::get('/tampil-data-wilayah/{wilayah{', [WilayahController::class, 'view'])->name('wilayah.view');;
 });
 
 require __DIR__ . '/settings.php';
