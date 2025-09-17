@@ -11,10 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('role', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_role', 50)->unique();
+            $table->timestamps();
+        });
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->enum('is_aktif', ['aktif', 'nonaktif'])->default('aktif');
+            $table->foreignId('role_id')->constrained('role')->onDelete('cascade')->default(3);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

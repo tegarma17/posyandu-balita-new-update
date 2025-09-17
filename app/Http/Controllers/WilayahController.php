@@ -42,4 +42,29 @@ class WilayahController extends Controller
     {
         return Inertia::render('Wilayah/Edit', compact('wilayah'));
     }
+    public function update(Request $request, Wilayah $wilayah)
+    {
+        $message = [
+            'required' => ':attribute Harap wajib diisi',
+        ];
+        $atribute = [
+            'kd_wilayah' => 'Kode Wilayah',
+            'nama_wilayah' => 'Nama Wilayah',
+
+        ];
+        $request->validate([
+            'kd_wilayah' => 'required',
+            'nama_wilayah' => 'required',
+        ], $message, $atribute);
+        $wilayah->update([
+            'kd_wilayah' => $request->input('kd_wilayah'),
+            'nama_wilayah' => $request->input('nama_wilayah'),
+        ]);
+        return redirect()->route('wilayah.index')->with('message', 'Data Wilayah berhasil ditambah');
+    }
+    public function delete(Wilayah $wilayah)
+    {
+        $wilayah->delete();
+        return redirect()->route('wilayah.index')->with('message', 'Data Tenaga Kesehatan berhasil dihapus');
+    }
 }

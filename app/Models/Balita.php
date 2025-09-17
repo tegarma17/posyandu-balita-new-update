@@ -22,4 +22,9 @@ class Balita extends Model
         'rt',
         'rw'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

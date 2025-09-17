@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
-            DaerahSeeder::class,
+            // DaerahSeeder::class,
         ]);
         // User::factory()->create([
         //     'name' => 'Test User',

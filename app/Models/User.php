@@ -47,4 +47,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function nakes()
+    {
+        return $this->hasOne(Nakes::class, 'user_id');
+    }
+    public function balita()
+    {
+        return $this->hasOne(Balita::class, 'user_id');
+    }
 }

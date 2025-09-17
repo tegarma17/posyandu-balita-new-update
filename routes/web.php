@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BalitaController;
 use App\Http\Controllers\NakesController;
+use App\Http\Controllers\PengukuranController;
+use App\Http\Controllers\PosyanduController;
 use App\Http\Controllers\WilayahController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,8 +34,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/data-wilayah', [WilayahController::class, 'index'])->name('wilayah.index');
     Route::get('/tambah-data-wilayah', [WilayahController::class, 'add'])->name('wilayah.tambah');
-    Route::post('/simpan-data-wilayah', [WilayahController::class, 'simpan'])->name('wilayah.simpan');;
-    Route::get('/tampil-data-wilayah/{wilayah{', [WilayahController::class, 'view'])->name('wilayah.view');;
+    Route::post('/simpan-data-wilayah', [WilayahController::class, 'simpan'])->name('wilayah.simpan');
+    Route::get('/tampil-data-wilayah/{wilayah}', [WilayahController::class, 'view'])->name('wilayah.view');
+    Route::put('/data-wilayah/{wilayah}/update', [WilayahController::class, 'update'])->name('wilayah.update');
+    Route::delete('/hapus-data-wilayah/{wilayah}/delete', [WilayahController::class, 'delete'])->name('wilayah.hapus');
+
+    Route::get('/data-posyandu', [PosyanduController::class, 'index'])->name('posyandu.index');
+    Route::get('/tambah-data-posyandu', [PosyanduController::class, 'add'])->name('posyandu.tambah');
+    Route::post('/simpan-data-posyandu', [PosyanduController::class, 'simpan'])->name('posyandu.simpan');
+    Route::get('/tampil-data-posyandu/{posyandu}', [PosyanduController::class, 'view'])->name('posyandu.view');
+    Route::put('/data-posyandu/{posyandu}/status-update', [PosyanduController::class, 'updateStatus'])->name('posyandu.status.update');
+    Route::put('/data-posyandu/{posyandu}/update', [PosyanduController::class, 'update'])->name('posyandu.update');
+
+    Route::get('/data-pengukuran-balita', [PengukuranController::class, 'index'])->name('pengukuran.index');
+    Route::get('/data-pengukuran', [PengukuranController::class, 'editPengukuran'])->name('pengukuran.balita');
 });
 
 require __DIR__ . '/settings.php';

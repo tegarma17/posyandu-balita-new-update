@@ -109,6 +109,7 @@ class NakesController extends Controller
         ], $message, $atribute);
         return redirect()->route('nakes.index')->with('message', 'Data Tenaga Kesehatan berhasil diupdate');
     }
+
     public function delete(Nakes $nakes)
     {
         $nakes->delete();
