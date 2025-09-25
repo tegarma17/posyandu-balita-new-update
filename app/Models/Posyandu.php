@@ -24,4 +24,8 @@ class Posyandu extends Model
     {
         return $this->belongsTo(Nakes::class, 'pj');
     }
+    public function wilayah()
+    {
+        return $this->belongsTo(Wilayah::class);
+    }
 }

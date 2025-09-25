@@ -45,7 +45,7 @@ export default function Tambah({ wilayah, nakes }: Props) {
     });
     const handleSimpan = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(data);
+
         post(route('posyandu.simpan'));
     };
 

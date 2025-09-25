@@ -47,7 +47,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/data-posyandu/{posyandu}/update', [PosyanduController::class, 'update'])->name('posyandu.update');
 
     Route::get('/data-pengukuran-balita', [PengukuranController::class, 'index'])->name('pengukuran.index');
-    Route::get('/data-pengukuran', [PengukuranController::class, 'editPengukuran'])->name('pengukuran.balita');
+    Route::get('/data-pengukuran/{balita}', [PengukuranController::class, 'editPengukuran'])->name('pengukuran.balita');
+    Route::post('/data-pengukuran-balita/simpan', [PengukuranController::class, 'simpanPengukuran'])->name('pengukuran.simpan');
 });
 
 require __DIR__ . '/settings.php';

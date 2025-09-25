@@ -76,11 +76,10 @@ export const columns: ColumnDef<Balita>[] = [
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Pengukuran dan Penimbangan</DropdownMenuLabel>
                             <DropdownMenuItem asChild>
-                                <Link className="block w-full" href={route('pengukuran.balita')} as="button" prefetch>
-                                    Data Penimbangan
+                                <Link className="block w-full" href={route('pengukuran.balita', balita.id)} as="button" prefetch>
+                                    Data Pengukuran
                                 </Link>
                             </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(balita.id)}>Data Pengukuran</DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuLabel>Vaksin dan Imunisasi</DropdownMenuLabel>
                             <DropdownMenuItem asChild>
