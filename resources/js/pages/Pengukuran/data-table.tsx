@@ -21,7 +21,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
             <Table>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
-                        <TableRow key={headerGroup.id} className="bg-teal-600">
+                        <TableRow key={headerGroup.id} className="bg-teal-600 hover:bg-teal-800">
                             {headerGroup.headers.map((header) => {
                                 return (
                                     <TableHead key={header.id} className="text-white">

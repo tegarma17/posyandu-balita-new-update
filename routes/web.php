@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BalitaController;
+use App\Http\Controllers\KmsController;
 use App\Http\Controllers\NakesController;
 use App\Http\Controllers\PengukuranController;
 use App\Http\Controllers\PosyanduController;
@@ -49,6 +50,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/data-pengukuran-balita', [PengukuranController::class, 'index'])->name('pengukuran.index');
     Route::get('/data-pengukuran/{balita}', [PengukuranController::class, 'editPengukuran'])->name('pengukuran.balita');
     Route::post('/data-pengukuran-balita/simpan', [PengukuranController::class, 'simpanPengukuran'])->name('pengukuran.simpan');
+
+    Route::get('/grafik-data-kms', [KmsController::class, 'index'])->name('kms.index');
 });
 
 require __DIR__ . '/settings.php';

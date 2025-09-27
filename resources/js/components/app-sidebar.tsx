@@ -3,27 +3,29 @@ import { Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuButton,
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { ClipboardList, HousePlus, UserCog, Users } from 'lucide-react';
+import { ChartNoAxesCombined, ClipboardList, HousePlus, UserCog, Users } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItemsMaster: NavItem[] = [
     { title: 'Data Balita', href: '/data-balita', icon: Users },
     { title: 'Data Tenaga Kesehatan', href: '/data-nakes', icon: Users },
-    { title: 'Data Wilayah', href: '/data-wilayah', icon: UserCog },
 ];
 const mainNavItemPosyandu: NavItem[] = [
     { title: 'Data Posyandu', href: '/data-posyandu', icon: HousePlus },
     { title: 'Data Wilayah', href: '/data-wilayah', icon: UserCog },
 ];
-const mainNavItemPp: NavItem[] = [{ title: 'Data Pengukuran', href: '/data-pengukuran-balita', icon: ClipboardList }];
+const mainNavItemPp: NavItem[] = [
+    { title: 'Data Pengukuran', href: '/data-pengukuran-balita', icon: ClipboardList },
+    { title: 'Data KMS', href: '/grafik-data-kms', icon: ChartNoAxesCombined },
+];
 
 export function AppSidebar() {
     return (
-        <Sidebar collapsible="icon" variant="inset">
+        <Sidebar collapsible="offcanvas" variant="inset">
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton size="lg" asChild>
+                        <SidebarMenuButton variant="default" asChild>
                             <Link href={dashboard()} prefetch>
                                 <AppLogo />
                             </Link>

@@ -27,4 +27,12 @@ class Balita extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function pengukurantb()
+    {
+        return $this->hasMany(Pengukuran::class);
+    }
+    public function pengukuranbb()
+    {
+        return $this->hasMany(Penimbangan::class);
+    }
 }

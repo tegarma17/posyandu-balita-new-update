@@ -5,9 +5,9 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
-import { Balita, columns, Pengukuran, Posyandu, Wilayah } from './columnPengukuran';
+import { Balita, columns, Gabungan, Posyandu, Wilayah } from './columnPengukuran';
 import { DataTable } from './data-table';
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -25,15 +25,15 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Dashboard({
-    pengukuran,
     wilayah,
     posyandu,
     balita,
+    gabungan,
 }: {
-    pengukuran: Pengukuran[];
     wilayah: Wilayah[];
     posyandu: Posyandu[];
     balita: Balita;
+    gabungan: Gabungan[];
 }) {
     const [selectedWilayah, setSelectedWilayah] = useState('');
     const filteredPosyandu = posyandu.filter((p) => String(p.wilayah_id) === String(selectedWilayah));
@@ -53,23 +53,34 @@ export default function Dashboard({
     }
     const usia = hitungUsiaBulan(balita.tgl_lahir);
 
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post, processing, errors, reset } = useForm({
         balita_id: balita.id,
         posyandu_id: '',
+        tgl_pengukuran: '',
         tb: '',
+        bb: '',
         usia: usia,
         j_pengukuran: '',
     });
     const handleSimpan = (e: React.FormEvent) => {
         e.preventDefault();
         console.log(data);
-        post(route('pengukuran.simpan'));
+        post(route('pengukuran.simpan'), {
+            onSuccess: () => {
+                reset(); // kosongkan form
+            },
+        });
     };
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
                 <div className="overflow-hidden rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border">
+                    <div className="p-3">
+                        <Link href={route('pengukuran.index')}>
+                            <Button className="bg-amber-500 hover:bg-amber-800">Kembali</Button>
+                        </Link>
+                    </div>
                     <h1 className="font-2xl p-3 text-center font-bold">Input Data Pengukuran {balita.nama}</h1>
                     <form encType="multipart/form-data" onSubmit={handleSimpan}>
                         <div className="grid grid-cols-2">
@@ -116,10 +127,10 @@ export default function Dashboard({
                             </div>
                         </div>
                         <div className="grid grid-cols-2">
-                            {/* <div className="grid w-full items-center gap-3 p-3">
+                            <div className="grid w-full items-center gap-3 p-3">
                                 <Label htmlFor="email">Berat Badan</Label>
-                                <Input type="number" placeholder="Berat Badan (Kg)" />
-                            </div> */}
+                                <Input type="number" placeholder="Berat Badan (Kg)" value={data.bb} onChange={(e) => setData('bb', e.target.value)} />
+                            </div>
                             <div className="grid w-full items-center gap-3 p-3">
                                 <Label htmlFor="email">Tinggi Badan</Label>
                                 <Input
@@ -130,28 +141,34 @@ export default function Dashboard({
                                 />
                             </div>
                         </div>
-                        <div className="grid w-full items-center gap-3 p-3">
-                            <Label htmlFor="email">Jenis Pengukuran</Label>
-                            <Select onValueChange={(val) => setData('j_pengukuran', val)} value={data.j_pengukuran}>
-                                <SelectTrigger className="w-full">
-                                    <SelectValue placeholder="Pilih Jenis Pengukuran Tinggi Badan" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectGroup>
-                                        <SelectLabel>Jenis Pengukuran</SelectLabel>
-                                        <SelectItem value="berdiri">Berdiri</SelectItem>
-                                        <SelectItem value="terlentang">Terlentang</SelectItem>
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
+                        <div className="grid grid-cols-2">
+                            <div className="grid w-full items-center gap-3 p-3">
+                                <Label htmlFor="email">Jenis Pengukuran</Label>
+                                <Select onValueChange={(val) => setData('j_pengukuran', val)} value={data.j_pengukuran}>
+                                    <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Pilih Jenis Pengukuran Tinggi Badan" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectGroup>
+                                            <SelectLabel>Jenis Pengukuran</SelectLabel>
+                                            <SelectItem value="berdiri">Berdiri</SelectItem>
+                                            <SelectItem value="terlentang">Terlentang</SelectItem>
+                                        </SelectGroup>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                            <div className="grid w-full items-center gap-3 p-3">
+                                <Label htmlFor="email">Tanggal Pengukuran</Label>
+                                <Input type="date" value={data.tgl_pengukuran} onChange={(e) => setData('tgl_pengukuran', e.target.value)} />
+                            </div>
                         </div>
                         <div className="flex flex-wrap items-center gap-2 p-3 md:flex-row">
-                            <Button>Button</Button>
+                            <Button className="bg-teal-500 hover:bg-teal-800">Simpan Pengukuran</Button>
                         </div>
                     </form>
                 </div>
                 <div className="relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border">
-                    <DataTable columns={columns} data={pengukuran} />
+                    <DataTable columns={columns} data={gabungan} />
                 </div>
             </div>
         </AppLayout>
