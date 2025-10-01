@@ -28,4 +28,13 @@ class Posyandu extends Model
     {
         return $this->belongsTo(Wilayah::class);
     }
+    public function penimbangan()
+    {
+        return $this->hasMany(Penimbangan::class);
+    }
+
+    public function pengukuran()
+    {
+        return $this->hasMany(Pengukuran::class);
+    }
 }

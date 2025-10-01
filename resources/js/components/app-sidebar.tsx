@@ -16,7 +16,7 @@ const mainNavItemPosyandu: NavItem[] = [
 ];
 const mainNavItemPp: NavItem[] = [
     { title: 'Data Pengukuran', href: '/data-pengukuran-balita', icon: ClipboardList },
-    { title: 'Data KMS', href: '/grafik-data-kms', icon: ChartNoAxesCombined },
+    { title: 'Data PSG', href: '/grafik-data-kms', icon: ChartNoAxesCombined },
 ];
 
 export function AppSidebar() {

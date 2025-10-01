@@ -52,6 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/data-pengukuran-balita/simpan', [PengukuranController::class, 'simpanPengukuran'])->name('pengukuran.simpan');
 
     Route::get('/grafik-data-kms', [KmsController::class, 'index'])->name('kms.index');
+    Route::get('/grafik-data-kms/{posyandu}', [KmsController::class, 'viewBalitabyPosyandu'])->name('kms.balitaByPosyandu');
 });
 
 require __DIR__ . '/settings.php';
